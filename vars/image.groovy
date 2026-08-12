@@ -1,12 +1,12 @@
-def call (String REGION, String PROJECT_ID, String REPOSITORY, String IMAGE_NAME) {
+def call(String region, String projectId, String repository, String imageName) {
 
-                sh '''
-                    gcloud auth configure-docker $REGION-docker.pkg.dev
+    sh """
+        gcloud auth configure-docker ${region}-docker.pkg.dev
 
-                    docker build -t \
-                    $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$BUILD_NUMBER .
+        docker build -t \
+        ${region}-docker.pkg.dev/${projectId}/${repository}/${imageName}:${BUILD_NUMBER} .
 
-                    docker push \
-                    $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/$IMAGE_NAME:$BUILD_NUMBER
-                '''
+        docker push \
+        ${region}-docker.pkg.dev/${projectId}/${repository}/${imageName}:${BUILD_NUMBER}
+    """
 }
